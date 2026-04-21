@@ -63,6 +63,8 @@ def stock():
         # 2. 讀取股票號碼
         question = request.form.get('question', '').strip()
         # 3. 查詢股票號碼的對應股價
+import requests
+
         # API URL
 url = f"https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&stockNo={stock_no}"
 
