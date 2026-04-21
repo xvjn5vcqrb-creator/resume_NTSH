@@ -63,6 +63,22 @@ def stock():
         # 2. 讀取股票號碼
         question = request.form.get('question', '').strip()
         # 3. 查詢股票號碼的對應股價
+        # API URL
+url = f"https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&stockNo={stock_no}"
+
+# 發送請求
+res = requests.get(url)
+data = res.json()
+
+# 判斷是否成功
+if data["stat"] == "OK":
+    print( data["title"])
+    print( data["fields"])
+    
+    print("資料：")
+    print("收盤價：",data["data"][0][6])
+else:
+    print("查無資料，請確認股票代號或日期")
         answer = "抱歉，我目前沒有這個股票號碼。"
         # 4. 回傳答案給使用者
         return render_template('stock.html', question=question, answer=answer)
